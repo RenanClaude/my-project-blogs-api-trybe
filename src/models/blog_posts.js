@@ -1,4 +1,10 @@
-const { DataTypes } = require('sequelize');
+// const { DataTypes } = require('sequelize');
+/**
+ * 
+ * @param {import('sequelize').Sequelize} sequelize 
+ * @param {*} DataTypes 
+ * @returns 
+ */
 
 const blogPostSchema = (sequelize, DataTypes) => {
   const blogPostTable = sequelize.define('BlogPost', {

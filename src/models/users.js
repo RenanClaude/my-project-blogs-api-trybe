@@ -1,4 +1,10 @@
-const { DataTypes } = require('sequelize');
+// const { DataTypes } = require('sequelize');
+/**
+ * 
+ * @param {import('sequelize').Sequelize} sequelize 
+ * @param {*} DataTypes 
+ * @returns 
+ */
 
 const usersSchema = (sequelize, DataTypes) => {
   const userTable = sequelize.define('User', {
@@ -10,6 +16,7 @@ const usersSchema = (sequelize, DataTypes) => {
   }, {
     tableName: 'users',
     underscored: true,
+    timestamps: false,
   })
 
   userTable.associate = (models) => {
