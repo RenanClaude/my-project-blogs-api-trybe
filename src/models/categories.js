@@ -8,8 +8,13 @@
 
 const categorySchema = (sequelize, DataTypes) => {
   const categoryTable = sequelize.define('Category', {
-    id: DataTypes.INTEGER,
-    name: DataTypes.STRING,
+    id: {
+      type: DataTypes.INTEGER,
+      name: DataTypes.STRING,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+  },
   }, {
     tableName: 'categories',
     underscored: true,
