@@ -8,7 +8,6 @@ const getAllEmailsService = async () => {
     const { email } = dataValues;
     return email;
   });
-  await Promise.all(result);
   // console.log('AQUI!', result);
   return result;
 };

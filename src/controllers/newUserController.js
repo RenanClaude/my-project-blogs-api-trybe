@@ -15,7 +15,7 @@ const newUserController = async (req, res) => {
   const newUser = await newUserService(email, displayName, password, image);
 
   const { password: _, ...dataUser } = newUser.dataValues;
-  const token = jwt.sign({ dataUser }, JWT_SECRET, { algorithm: 'HS256', expiresIn: '60m' });
+  const token = jwt.sign({ data: dataUser }, JWT_SECRET, { algorithm: 'HS256', expiresIn: '60m' });
   
   return res.status(201).json({ token });
 };
