@@ -15,6 +15,7 @@ const categorySchema = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
   },
+    name: DataTypes.STRING
   }, {
     tableName: 'categories',
     underscored: true,
