@@ -12,6 +12,14 @@ const getAllUsersService = async () => {
 };
 // getAllUsersService();
 
+const getUserService = async (id) => {
+  const InfosUser = await User.findByPk(id);
+  // console.log('AQUI!', InfosUser);
+  return InfosUser;
+};
+// getUserService(1000);
+
 module.exports = {
   getAllUsersService,
+  getUserService,
 };
