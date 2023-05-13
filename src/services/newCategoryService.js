@@ -1,16 +1,16 @@
 const { Category } = require('../models');
 
-const getAllCategoryNamesService = async () => {
-  const data = await Category.findAll();
+// const getAllCategoryNamesService = async () => {
+//   const data = await Category.findAll();
   
-  const result = data.map((categoryObj) => {
-    const { dataValues } = categoryObj;
-    const { name } = dataValues;
-    return name;
-  });
-  // console.log('AQUI!', result);
-  return result;
-};
+//   const result = data.map((categoryObj) => {
+//     const { dataValues } = categoryObj;
+//     const { name } = dataValues;
+//     return name;
+//   });
+//   console.log('AQUI!', result);
+//   return result;
+// };
 // getAllCategoryNamesService();
 
 const newCategoryService = async (name) => {
@@ -24,5 +24,5 @@ const newCategoryService = async (name) => {
 
 module.exports = {
   newCategoryService,
-  getAllCategoryNamesService,
+  // getAllCategoryNamesService,
 };
