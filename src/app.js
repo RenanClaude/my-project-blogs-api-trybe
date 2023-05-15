@@ -1,5 +1,5 @@
 const express = require('express');
-const { loginValidator } = require('./middlewares/loginMiddlewares');
+const { loginValidator } = require('./middlewares/loginMiddleware');
 const { loginController } = require('./controllers/loginController');
 const { newUserValidator } = require('./middlewares/newUserMiddleware');
 const { newUserController } = require('./controllers/newUserController');
@@ -7,6 +7,8 @@ const { tokenValidator } = require('./middlewares/tokenValidator');
 const { getAllUsersController, getUserController } = require('./controllers/usersController');
 const { newCategoryController } = require('./controllers/newCategoryController');
 const { getAllCategoriesController } = require('./controllers/categoriesController');
+const { newPostController } = require('./controllers/postController');
+const { newPostFieldValidator } = require('./middlewares/newPostMiddleware');
 
 // ...
 
@@ -40,6 +42,9 @@ app.post('/categories', tokenValidator, newCategoryController);
 
 // endpoint - requisito 9
 app.get('/categories', tokenValidator, getAllCategoriesController);
+
+// endpoint - requisito 12
+app.post('/post', tokenValidator, newPostFieldValidator, newPostController);
 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
