@@ -7,7 +7,7 @@ const { tokenValidator } = require('./middlewares/tokenValidator');
 const { getAllUsersController, getUserController } = require('./controllers/usersController');
 const { newCategoryController } = require('./controllers/newCategoryController');
 const { getAllCategoriesController } = require('./controllers/categoriesController');
-const { newPostController } = require('./controllers/postController');
+const { newPostController, allPostsController } = require('./controllers/postController');
 const { newPostFieldValidator } = require('./middlewares/newPostMiddleware');
 
 // ...
@@ -45,6 +45,9 @@ app.get('/categories', tokenValidator, getAllCategoriesController);
 
 // endpoint - requisito 12
 app.post('/post', tokenValidator, newPostFieldValidator, newPostController);
+
+// endpoint - requisito 13
+app.get('/post', tokenValidator, allPostsController);
 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
