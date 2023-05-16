@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { newPostService, getAllPostsService } = require('../services/postService');
+const { newPostService, getAllPostsService, getPostService } = require('../services/postService');
 const { getAllCategoriesService } = require('../services/categoriesService');
 
 const { JWT_SECRET } = process.env;
@@ -24,12 +24,26 @@ const newPost = await newPostService(title, content, id, categoryIds);
 return res.status(201).json(newPost);
 };
 
-const allPostsController = async (_req, res) => {
+const getAllPostsController = async (_req, res) => {
   const allPosts = await getAllPostsService();
   return res.status(200).json(allPosts);
 };
 
+const getPostController = async (req, res) => {
+  const { id } = req.params;
+  const allPosts = await getAllPostsService();
+  const verificationPost = allPosts.every((post) => post.id !== Number(id));
+  
+  if (verificationPost) {
+    res.status(404).json({ message: 'Post does not exist' });
+  }
+
+  const post = await getPostService(id);
+  return res.status(200).json(post);
+};
+
 module.exports = {
   newPostController,
-  allPostsController,
+  getAllPostsController,
+  getPostController,
 };
