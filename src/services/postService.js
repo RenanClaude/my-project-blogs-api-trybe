@@ -33,12 +33,8 @@ const allPosts = await BlogPost.findAll({
     },
   },
 ] });
-// const y = allPosts.map((post) => post.dataValues.user.dataValues);
-// const x = allPosts.map((post) => post.dataValues);
-// console.log('RESULT HERE:', x);
 return allPosts;
 };
-getAllPostsService();
 
 module.exports = {
   newPostService,
