@@ -64,9 +64,12 @@ const getPostService = async (id) => {
     return getUpdatedPost.dataValues;
   };
 
+  const deletePostService = async (id) => BlogPost.destroy({ where: { id } });
+
 module.exports = {
   newPostService,
   getAllPostsService,
   getPostService,
   updatePostService,
+  deletePostService,
 };

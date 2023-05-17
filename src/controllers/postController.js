@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { 
-  newPostService, getAllPostsService, getPostService, updatePostService,
+  newPostService, getAllPostsService, getPostService, updatePostService, deletePostService,
  } = require('../services/postService');
 const { getAllCategoriesService } = require('../services/categoriesService');
 
@@ -63,9 +63,32 @@ if (!title || !content) {
   return res.status(200).json(updatedPost);
 };
 
+const deletePostController = async (req, res) => {
+ const { id } = req.params;
+ const allPosts = await getAllPostsService();
+ const verificationPost = allPosts.every((post) => post.id !== Number(id));
+
+ if (verificationPost) {
+  return res.status(404).json({ message: 'Post does not exist' });
+ }
+ 
+ const { authorization: token } = req.headers;
+ const payload = jwt.verify(token, JWT_SECRET);
+ const { id: idFromPayload } = payload.data;
+ const post = await getPostService(id);
+
+ if (Number(idFromPayload) !== Number(post.userId)) {
+  return res.status(401).json({ message: 'Unauthorized user' });
+}
+
+ await deletePostService(id);
+ return res.status(204).json();
+};
+
 module.exports = {
   newPostController,
   getAllPostsController,
   getPostController,
   updatePostController,
+  deletePostController,
 };
