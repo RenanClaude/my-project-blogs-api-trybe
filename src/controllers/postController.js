@@ -37,7 +37,7 @@ const getPostController = async (req, res) => {
   const verificationPost = allPosts.every((post) => post.id !== Number(id));
   
   if (verificationPost) {
-    res.status(404).json({ message: 'Post does not exist' });
+    return res.status(404).json({ message: 'Post does not exist' });
   }
 
   const post = await getPostService(id);

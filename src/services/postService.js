@@ -25,7 +25,7 @@ const allPosts = await BlogPost.findAll({
     model: Category, as: 'categories', through: { attributes: [] },
   },
 ] });
-const result = allPosts.map((post) => post.dataValues); 
+const result = allPosts.map((post) => post.dataValues);
 /* Não precisa deste map para funcionar, sequelize já acessa sozinho o dataValues */
 return result;
 };
@@ -42,7 +42,7 @@ const getPostService = async (id) => {
     },
   ] });
 
-    return post.dataValues;
+    return post;
   };
 
   const updatePostService = async (id, title, content) => {
