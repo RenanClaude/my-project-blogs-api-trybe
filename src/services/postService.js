@@ -41,10 +41,9 @@ const getPostService = async (id) => {
       model: Category, as: 'categories', through: { attributes: [] },
     },
   ] });
-  // console.log(post.dataValues);
-  return post.dataValues;
+
+    return post.dataValues;
   };
-  // getPostService(2);
 
   const updatePostService = async (id, title, content) => {
     await BlogPost.update(
