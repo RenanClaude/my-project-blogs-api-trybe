@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
-const { newPostService, getAllPostsService, getPostService } = require('../services/postService');
+const { 
+  newPostService, getAllPostsService, getPostService, updatePostService,
+ } = require('../services/postService');
 const { getAllCategoriesService } = require('../services/categoriesService');
 
 const { JWT_SECRET } = process.env;
@@ -42,8 +44,28 @@ const getPostController = async (req, res) => {
   return res.status(200).json(post);
 };
 
+const updatePostController = async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const { authorization: token } = req.headers;
+
+const payload = jwt.verify(token, JWT_SECRET);
+const { id: userId } = payload.data;
+
+if (userId !== Number(id)) {
+  return res.status(401).json({ message: 'Unauthorized user' });
+}
+if (!title || !content) {
+  return res.status(400).json({ message: 'Some required fields are missing' });
+}
+
+  const updatedPost = await updatePostService(id, title, content);
+  return res.status(200).json(updatedPost);
+};
+
 module.exports = {
   newPostController,
   getAllPostsController,
   getPostController,
+  updatePostController,
 };
