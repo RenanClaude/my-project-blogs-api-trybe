@@ -69,7 +69,7 @@ const getPostService = async (id) => {
 
   const deletePostService = async (id) => BlogPost.destroy({ where: { id } });
 
-  const queryTitlePostService = async (q) => {
+  const queryPostService = async (q) => {
     const queryResult = await BlogPost.findAll({
       include: [{
         model: User, as: 'user', attributes: { exclude: ['password'] },
@@ -80,24 +80,7 @@ const getPostService = async (id) => {
     ],
        where:
          {
-           title: { [Op.like]: `%${q}%` },
-        },
-      });
-    return queryResult;
-  };
-
-  const queryContentPostService = async (q) => {
-    const queryResult = await BlogPost.findAll({
-      include: [{
-        model: User, as: 'user', attributes: { exclude: ['password'] },
-      },
-      { 
-        model: Category, as: 'categories', through: { attributes: [] },
-      },
-    ],
-       where:
-         {
-          content: { [Op.like]: `%${q}%` },
+          [Op.or]: [{ title: q }, { content: q }],
         },
       });
     return queryResult;
@@ -109,6 +92,6 @@ module.exports = {
   getPostService,
   updatePostService,
   deletePostService,
-  queryTitlePostService,
-  queryContentPostService,
+  queryPostService,
+  // queryContentPostService,
 };

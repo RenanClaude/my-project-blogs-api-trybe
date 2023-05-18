@@ -5,8 +5,7 @@ const {
   getPostService, 
   updatePostService, 
   deletePostService, 
-  queryTitlePostService,
-  queryContentPostService,
+  queryPostService,
  } = require('../services/postService');
 const { getAllCategoriesService } = require('../services/categoriesService');
 
@@ -93,17 +92,13 @@ const deletePostController = async (req, res) => {
 
 const searchPostController = async (req, res) => {
   const { q } = req.query;
-
-  // const allPosts = await getAllPostsService();
-  // const queryResult = allPosts.filter((post) => post.title.toUpperCase().includes(q.toUpperCase()));
-
-  const queryResult = await queryTitlePostService(q);
-
-if (queryResult.length === 0) {
-  const queryResult2 = await queryContentPostService(q);
-  return res.status(200).json(queryResult2);
-}
-
+  
+  if (q === '') {
+    const queryResult2 = await getAllPostsService(q);
+    return res.status(200).json(queryResult2);
+  }
+  
+  const queryResult = await queryPostService(q);
   return res.status(200).json(queryResult);
 };
 
