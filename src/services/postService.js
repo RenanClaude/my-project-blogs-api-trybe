@@ -80,7 +80,7 @@ const getPostService = async (id) => {
     ],
        where:
          {
-          [Op.or]: [{ title: q }, { content: q }],
+          [Op.or]: { title: { [Op.substring]: q }, content: { [Op.substring]: q } }, 
         },
       });
     return queryResult;
@@ -93,5 +93,4 @@ module.exports = {
   updatePostService,
   deletePostService,
   queryPostService,
-  // queryContentPostService,
 };
