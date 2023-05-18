@@ -1,6 +1,12 @@
 const jwt = require('jsonwebtoken');
 const { 
-  newPostService, getAllPostsService, getPostService, updatePostService, deletePostService,
+  newPostService,
+  getAllPostsService, 
+  getPostService, 
+  updatePostService, 
+  deletePostService, 
+  queryTitlePostService,
+  queryContentPostService,
  } = require('../services/postService');
 const { getAllCategoriesService } = require('../services/categoriesService');
 
@@ -85,10 +91,27 @@ const deletePostController = async (req, res) => {
  return res.status(204).json();
 };
 
+const searchPostController = async (req, res) => {
+  const { q } = req.query;
+
+  // const allPosts = await getAllPostsService();
+  // const queryResult = allPosts.filter((post) => post.title.toUpperCase().includes(q.toUpperCase()));
+
+  const queryResult = await queryTitlePostService(q);
+
+if (queryResult.length === 0) {
+  const queryResult2 = await queryContentPostService(q);
+  return res.status(200).json(queryResult2);
+}
+
+  return res.status(200).json(queryResult);
+};
+
 module.exports = {
   newPostController,
   getAllPostsController,
   getPostController,
   updatePostController,
   deletePostController,
+  searchPostController,
 };

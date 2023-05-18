@@ -5,7 +5,9 @@ const { newUserValidator } = require('./middlewares/newUserMiddleware');
 const { newUserController } = require('./controllers/newUserController');
 const { tokenValidator } = require('./middlewares/tokenValidator');
 const { 
-  getAllUsersController, getUserController, deleteUserController,
+  getAllUsersController,
+  getUserController,
+  deleteUserController,
 } = require('./controllers/usersController');
 const { newCategoryController } = require('./controllers/newCategoryController');
 const { getAllCategoriesController } = require('./controllers/categoriesController');
@@ -15,7 +17,8 @@ const {
   getPostController,
   updatePostController,
   deletePostController,
- } = require('./controllers/postController');
+  searchPostController,
+} = require('./controllers/postController');
 const { newPostFieldValidator } = require('./middlewares/newPostMiddleware');
 
 // ...
@@ -56,6 +59,9 @@ app.post('/post', tokenValidator, newPostFieldValidator, newPostController);
 
 // endpoint - requisito 13
 app.get('/post', tokenValidator, getAllPostsController);
+
+// endpoint - requisito 18
+app.get('/post/search?', tokenValidator, searchPostController);
 
 // endpoint - requisito 14
 app.get('/post/:id', tokenValidator, getPostController);
