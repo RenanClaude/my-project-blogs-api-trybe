@@ -12,7 +12,6 @@ const newUserValidator = (req, res, next) => {
     return res.status(400)
     .json({ message: '"password" length must be at least 6 characters long' });
   }
-  // return res.status(200).json({ message: '"FOI' });
   next();
 };
 

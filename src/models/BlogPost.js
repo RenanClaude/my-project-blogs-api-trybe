@@ -1,4 +1,3 @@
-// const { DataTypes } = require('sequelize');
 /**
  * 
  * @param {import('sequelize').Sequelize} sequelize 
@@ -19,11 +18,9 @@ const blogPostSchema = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     published: {
       type: DataTypes.DATE,
-      // allowNull: false,
     },
     updated: {
       type: DataTypes.DATE,
-      // allowNull: false,
     }
   }, {
     tableName: 'blog_posts',

@@ -1,4 +1,3 @@
-// const { DataTypes } = require('sequelize');
 /**
  * 
  * @param {import('sequelize').Sequelize} sequelize 

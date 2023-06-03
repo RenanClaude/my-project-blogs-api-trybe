@@ -33,8 +33,6 @@ app.get('/', (_request, response) => {
 app.use(express.json());
 
 // ...
-// docker-compose up -d --build
-// docker exec -it blogs_api bash
 
 // endpoint - requisito 3
 app.post('/login', loginValidator, loginController);

@@ -4,8 +4,7 @@ const { newCategoryService,
 
 const newCategoryController = async (req, res) => {
   const { name } = req.body;
-  // const allCategoryNames = await getAllCategoryNamesService();
-  // const existingCategory = allCategoryNames.map((categoryName) => categoryName === name);
+  
   if (!name) {
     return res.status(400).json({ message: '"name" is required' });
   }

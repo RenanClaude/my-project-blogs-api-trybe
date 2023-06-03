@@ -7,7 +7,7 @@ const newPostService = async (title, content, userId, categoryIds) => {
   const newPost = await BlogPost
   .create({ title, content, userId, published: new Date(), updated: new Date() });
   const { dataValues } = newPost;
-  // console.log(dataValues);
+  
   const getNewPostCategory = categoryIds.map((categoryId) => {
     const newPostCategory = PostCategory
     .create({ postId: dataValues.id, categoryId });
@@ -17,7 +17,6 @@ const newPostService = async (title, content, userId, categoryIds) => {
 
   return dataValues;
 };
-// newPostService('NEW!', 'Content here26', 1, [1, 2]);
 
 const getAllPostsService = async () => {
 const allPosts = await BlogPost.findAll({ 
@@ -29,10 +28,8 @@ const allPosts = await BlogPost.findAll({
   },
 ] });
 const result = allPosts.map((post) => post.dataValues);
-/* Não precisa deste map para funcionar, sequelize já acessa sozinho o dataValues */
 return result;
 };
-// getAllPostsService();
 
 const getPostService = async (id) => {
   const post = await BlogPost.findOne({
